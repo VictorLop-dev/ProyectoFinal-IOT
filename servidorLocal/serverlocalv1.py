@@ -1,4 +1,5 @@
 #No sé del todo si cambia la modificación con otras laps aquí o sólo en el de arduino, pero creo que este es universal.
+#Este programa ha sido probado y verificado, su funcion es insertar temperatura llenando el campo que incluye el nombre del sensor.
 from flask import Flask, request, jsonify
 from flask_mysqldb import MySQL
 from flask_cors import CORS
