@@ -91,8 +91,8 @@ ax.scatter(df['timestamp'].iloc[-1], df['valor'].iloc[-1], color=last_color, zor
 # Agregar el valor al último punto
 ax.text(
     df['timestamp'].iloc[-1],
-    df['valor'].iloc[-1] - 0.5,  # Ajustar el valor para que el texto quede debajo
-    f"{df['valor'].iloc[-1]:.2f}",  # Formato con dos decimales
+    df['valor'].iloc[-1] - 0.25,  # Ajustar el valor para que el texto quede debajo
+    f"{df['valor'].iloc[-1]:.1f}",  # Formato con dos decimales
     color='white',
     fontsize=8,
     ha='center'
