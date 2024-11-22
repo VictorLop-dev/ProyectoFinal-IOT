@@ -1,118 +1,63 @@
-import mysql.connector
-import streamlit as st
-import pandas as pd
-import matplotlib.pyplot as plt
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+import pymysql
 
-# Conexión a la base de datos
-connection = mysql.connector.connect(
-    host='autorack.proxy.rlwy.net',
-    user='root',
-    password='QYruqXDRGGyBxlYXXcoMmaTSExlNQYxZ',
-    database='railway',
-    port =12903
-)
-#print('Connected')
+app = Flask(__name__)
+CORS(app)
 
-cursor = connection.cursor()
-
-# Consulta de datos
-cursor.execute("SELECT * FROM medicinav1")
-data = cursor.fetchall()
-columns = cursor.column_names  # Obtener los nombres de las columnas
-print(data)
-
-# Mostrar título en Streamlit
-st.title('Lecturas del sensor')
-
-# Crear un DataFrame con los datos
-df = pd.DataFrame(data, columns=columns)
-
-# Asegurarse de que la columna de tiempo sea datetime y ordenar por tiempo
-df['timestamp'] = pd.to_datetime(df['timestamp'])  # Ajusta 'timestamp' al nombre real de tu columna de tiempo
-df = df.sort_values(by='timestamp', ascending=True)  # Ordenar de más antigua a más reciente
-
-# Mostrar los datos en Streamlit
-st.dataframe(df)
-
-# Usar estilo oscuro de Matplotlib
-plt.style.use('dark_background')  # Activa el modo oscuro
-
-# Crear la gráfica con puntos y colores personalizados
-fig, ax = plt.subplots()
-
-# Colores según las condiciones
-for i in range(len(df) - 1):  # Iterar sobre los puntos
-    # Determinar el color del punto
-    if df['valor'].iloc[i] > 29:  # Ajustar a tus valores
-        color = 'red'
-    elif df['valor'].iloc[i] < 26:
-        color = 'blue'
-    else:
-        color = 'green'
-
-    # Graficar el punto
-    ax.scatter(df['timestamp'].iloc[i], df['valor'].iloc[i], color=color, zorder=3)
-
-    # Agregar el valor debajo del punto
-    ax.text(
-        df['timestamp'].iloc[i],
-        df['valor'].iloc[i] - 0.25,  # Ajustar el valor para que el texto quede debajo
-        f"{df['valor'].iloc[i]:.1f}",  # Formato con dos decimales
-        color='white',
-        fontsize=8,
-        ha='center'  # Centrar el texto horizontalmente
+# Configura la conexión a MySQL con PyMySQL
+def get_db_connection():
+    return pymysql.connect(
+        host='autorack.proxy.rlwy.net',   # La URL pública de Railway
+        user='root',
+        password='QYruqXDRGGyBxlYXXcoMmaTSExlNQYxZ',
+        database='railway',
+        port=12903,                        # Asegúrate de incluir el puerto correcto
+        cursorclass=pymysql.cursors.DictCursor  # Opcional: para que las filas sean diccionarios
     )
 
-    # Determinar el color de la línea según el punto al que conecta
-    if df['valor'].iloc[i + 1] > 29:
-        line_color = 'red'
-    elif df['valor'].iloc[i + 1] < 26:
-        line_color = 'blue'
-    else:
-        line_color = 'green'
+# Ruta para insertar datos
+@app.route('/insert_data', methods=['POST'])
+def insert_data():
+    data = request.get_json()
+    nombre_sensor = data.get('nombre_sensor')
+    valor_sensor = data.get('valor_sensor')
+    if valor_sensor is None or nombre_sensor is None:
+        return jsonify({'error': 'No se proporcionó el nombre o valor del sensor'}), 400
 
-    # Graficar la línea hasta el siguiente punto
-    ax.plot(
-        [df['timestamp'].iloc[i], df['timestamp'].iloc[i + 1]],
-        [df['valor'].iloc[i], df['valor'].iloc[i + 1]],
-        color=line_color,
-        zorder=2
-    )
+    # Conectar con MySQL e insertar el dato
+    try:
+        connection = get_db_connection()
+        with connection.cursor() as cursor:
+            cursor.execute("INSERT INTO medicinav1 (nombre_sensor, valor) VALUES (%s, %s)", (nombre_sensor, valor_sensor))
+        connection.commit()
+        connection.close()
+        return jsonify({'message': 'Datos insertados correctamente'}), 201
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
-# Graficar el último punto
-if df['valor'].iloc[-1] > 29:
-    last_color = 'red'
-elif df['valor'].iloc[-1] < 26:
-    last_color = 'blue'
-else:
-    last_color = 'green'
+# Ruta para obtener datos
+@app.route('/get_data', methods=['GET'])
+def get_data():
+    try:
+        connection = get_db_connection()
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM medicinav1 ORDER BY timestamp DESC LIMIT 100")
+            rows = cursor.fetchall()
+        connection.close()
 
-ax.scatter(df['timestamp'].iloc[-1], df['valor'].iloc[-1], color=last_color, zorder=3)
+        # Formatear los datos en JSON
+        data = []
+        for row in rows:
+            data.append({
+                'medicion_num': row['medicion_num'],
+                'nombre_sensor': row['nombre_sensor'],
+                'valor': row['valor'],
+                'timestamp': row['timestamp'].strftime('%Y-%m-%d %H:%M:%S')
+            })
+        return jsonify(data), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
-# Agregar el valor al último punto
-ax.text(
-    df['timestamp'].iloc[-1],
-    df['valor'].iloc[-1] - 0.25,  # Ajustar el valor para que el texto quede debajo
-    f"{df['valor'].iloc[-1]:.1f}",  # Formato con dos decimales
-    color='white',
-    fontsize=8,
-    ha='center'
-)
-ax.set_ylim(df['valor'].min() - 1, df['valor'].max() + 1)
-#Lo de abajo en teoria amplia el alcance de la grafica en x, pero hasta ahora no ha hecho falta.
-#ax.set_xlim(df['timestamp'].min() - pd.Timedelta(seconds=5), df['timestamp'].max() + pd.Timedelta(seconds=5))  # Espacio horizontal
-# Ajustes del gráfico
-ax.set_title('Temperatura de la insulina', color='white')  # Título en blanco para destacar
-ax.set_xlabel('Tiempo', color='white')  # Etiqueta del eje x en blanco
-ax.set_ylabel('Temperatura (°C)', color='white')  # Etiqueta del eje y en blanco
-plt.xticks(rotation=45, color='white')  # Rotar etiquetas del eje x y ponerlas en blanco
-plt.yticks(color='white')  # Etiquetas del eje y en blanco
-
-# Invertir el eje x para que las más recientes estén a la izquierda
-ax.invert_xaxis()
-
-# Mostrar la gráfica en Streamlit
-st.pyplot(fig)
-
-# Cerrar conexión a la base de datos
-connection.close()
+if __name__ == '__main__':
+    app.run(port=5000, debug=True)
