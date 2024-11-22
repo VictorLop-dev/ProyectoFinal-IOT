@@ -8,7 +8,7 @@ st.title('Visualización de datos de sensores')
 
 # Entradas para configurar la conexión
 #st.sidebar.header("Configuración de la base de datos")
-host = "autorack.proxy.rlwy.net:12903"
+host = "mysql.railway.internal"
 user = "root"
 password = "QYruqXDRGGyBxlYXXcoMmaTSExlNQYxZ"
 database = "railway"
