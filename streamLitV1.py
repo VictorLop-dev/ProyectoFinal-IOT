@@ -5,10 +5,11 @@ import matplotlib.pyplot as plt
 
 # Conexión a la base de datos
 connection = pymysql.connect(
-    host='localhost',
+    host='mysql.railway.internal',
     user='root',
-    password='tu_contraseña',
-    database='finalv1'
+    password='QYruqXDRGGyBxlYXXcoMmaTSExlNQYxZ',
+    database='railway',
+    port = 12903
 )
 print('Connected')
 
