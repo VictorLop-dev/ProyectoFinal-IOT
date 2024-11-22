@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 # Conexión a la base de datos
 connection = mysql.connector.connect(
-    host='mysql.railway.internal',
+    host='iotweb-production.up.railway.app',
     user='root',
     password='QYruqXDRGGyBxlYXXcoMmaTSExlNQYxZ',
     database='railway'
