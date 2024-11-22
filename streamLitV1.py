@@ -8,7 +8,7 @@ st.title('Visualización de datos de sensores')
 
 # Entradas para configurar la conexión
 #st.sidebar.header("Configuración de la base de datos")
-host = "mysql://root:QYruqXDRGGyBxlYXXcoMmaTSExlNQYxZ@mysql.railway.internal:3306/railway"
+host = "mysql.railway.internal"
 user = "root"
 password = "QYruqXDRGGyBxlYXXcoMmaTSExlNQYxZ"
 database = "railway"
