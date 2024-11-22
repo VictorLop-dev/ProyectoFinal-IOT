@@ -8,16 +8,17 @@ st.title('Visualización de datos de sensores')
 
 # Entradas para configurar la conexión
 st.sidebar.header("Configuración de la base de datos")
-host = st.sidebar.text_input("Host", value="mysql.railway.internal")
+host = st.sidebar.text_input("Host", value="localhost")
 user = st.sidebar.text_input("Usuario", value="root")
-password = st.sidebar.text_input("Contraseña", type="password", value="QYruqXDRGGyBxlYXXcoMmaTSExlNQYxZ")
-database = st.sidebar.text_input("Base de datos", value="railway")
+password = st.sidebar.text_input("Contraseña", type="password", value="tu_contraseña")
+database = st.sidebar.text_input("Base de datos", value="finalv1")
 
-# Conectar a la base de datos
+# Conectar a la base de datos con pymysql
 @st.cache_data(ttl=600)
 def fetch_data(host, user, password, database):
     try:
-        connection = mysql.connector.connect(
+        # Conexión a la base de datos
+        connection = pymysql.connect(
             host=host,
             user=user,
             password=password,
@@ -26,10 +27,10 @@ def fetch_data(host, user, password, database):
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM medicinav1")
         data = cursor.fetchall()
-        columns = cursor.column_names
+        columns = [desc[0] for desc in cursor.description]  # Obtener los nombres de las columnas
         connection.close()
         return pd.DataFrame(data, columns=columns)
-    except mysql.connector.Error as e:
+    except pymysql.MySQLError as e:
         st.error(f"Error al conectar a la base de datos: {e}")
         return pd.DataFrame()
 
