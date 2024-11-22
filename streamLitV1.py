@@ -5,10 +5,11 @@ import matplotlib.pyplot as plt
 
 # Conexión a la base de datos
 connection = mysql.connector.connect(
-    host='localhost',
+    host='mysql://root:QYruqXDRGGyBxlYXXcoMmaTSExlNQYxZ@autorack.proxy.rlwy.net:12903/railway',
     user='root',
     password='QYruqXDRGGyBxlYXXcoMmaTSExlNQYxZ',
-    database='railway'
+    database='railway',
+    port =12903
 )
 #print('Connected')
 
