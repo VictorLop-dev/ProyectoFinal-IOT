@@ -1,18 +1,21 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import pymysql
+from threading import Thread
+import streamlit as st
 
+# Configura la aplicación Flask
 app = Flask(__name__)
 CORS(app)
 
 # Configura la conexión a MySQL con PyMySQL
 def get_db_connection():
     return pymysql.connect(
-        host='autorack.proxy.rlwy.net',   # La URL pública de Railway
+        host='autorack.proxy.rlwy.net',  # La URL pública de Railway
         user='root',
         password='QYruqXDRGGyBxlYXXcoMmaTSExlNQYxZ',
         database='railway',
-        port=12903,                        # Asegúrate de incluir el puerto correcto
+        port=12903,  # Asegúrate de incluir el puerto correcto
         cursorclass=pymysql.cursors.DictCursor  # Opcional: para que las filas sean diccionarios
     )
 
@@ -59,5 +62,22 @@ def get_data():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+# Función para ejecutar la aplicación Flask en segundo plano
+def run_flask():
+    app.run(port=5000, debug=False, use_reloader=False)
+
+# Ejecuta Flask en un hilo separado
+flask_thread = Thread(target=run_flask)
+flask_thread.start()
+
+# Código de Streamlit
+st.title("Aplicación de Streamlit con API Flask")
+st.write("La aplicación Flask está ejecutándose en segundo plano.")
+
+if st.button("Consultar datos"):
+    response = requests.get("http://localhost:5000/get_data")
+    if response.status_code == 200:
+        data = response.json()
+        st.write(data)
+    else:
+        st.error("Error al obtener datos de la API Flask")
