@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 # Conexión a la base de datos
 connection = mysql.connector.connect(
-    host='mysql://root:QYruqXDRGGyBxlYXXcoMmaTSExlNQYxZ@mysql.railway.internal:3306/railway',
+    host='autorack.proxy.rlwy.net',
     user='root',
     password='QYruqXDRGGyBxlYXXcoMmaTSExlNQYxZ',
     database='railway'
