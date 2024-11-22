@@ -1,118 +1,115 @@
-import pymysql
+import mysql.connector
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Conexión a la base de datos
-connection = pymysql.connect(
-    host='mysql.railway.internal',
-    user='root',
-    password='QYruqXDRGGyBxlYXXcoMmaTSExlNQYxZ',
-    database='railway',
-    port = 12903
-)
-print('Connected')
+# Configuración inicial de Streamlit
+st.title('Visualización de datos de sensores')
 
-cursor = connection.cursor()
+# Entradas para configurar la conexión
+st.sidebar.header("Configuración de la base de datos")
+host = st.sidebar.text_input("Host", value="localhost")
+user = st.sidebar.text_input("Usuario", value="root")
+password = st.sidebar.text_input("Contraseña", type="password", value="tu_contraseña")
+database = st.sidebar.text_input("Base de datos", value="finalv1")
 
-# Consulta de datos
-cursor.execute("SELECT * FROM medicinav1")
-data = cursor.fetchall()
-columns = cursor.column_names  # Obtener los nombres de las columnas
-print(data)
+# Conectar a la base de datos
+@st.cache_data(ttl=600)
+def fetch_data(host, user, password, database):
+    try:
+        connection = mysql.connector.connect(
+            host=host,
+            user=user,
+            password=password,
+            database=database
+        )
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM medicinav1")
+        data = cursor.fetchall()
+        columns = cursor.column_names
+        connection.close()
+        return pd.DataFrame(data, columns=columns)
+    except mysql.connector.Error as e:
+        st.error(f"Error al conectar a la base de datos: {e}")
+        return pd.DataFrame()
 
-# Mostrar título en Streamlit
-st.title('Lecturas del sensor')
+# Cargar datos
+df = fetch_data(host, user, password, database)
 
-# Crear un DataFrame con los datos
-df = pd.DataFrame(data, columns=columns)
+if not df.empty:
+    # Procesar y mostrar los datos
+    if 'timestamp' in df.columns:
+        df['timestamp'] = pd.to_datetime(df['timestamp'])
+        df = df.sort_values(by='timestamp', ascending=True)
 
-# Asegurarse de que la columna de tiempo sea datetime y ordenar por tiempo
-df['timestamp'] = pd.to_datetime(df['timestamp'])  # Ajusta 'timestamp' al nombre real de tu columna de tiempo
-df = df.sort_values(by='timestamp', ascending=True)  # Ordenar de más antigua a más reciente
+    st.subheader("Tabla de datos")
+    st.dataframe(df)
 
-# Mostrar los datos en Streamlit
-st.dataframe(df)
+    # Visualización de los datos
+    if 'timestamp' in df.columns and 'valor' in df.columns:
+        fig, ax = plt.subplots()
 
-# Usar estilo oscuro de Matplotlib
-plt.style.use('dark_background')  # Activa el modo oscuro
+        # Colores según las condiciones
+        for i in range(len(df) - 1):
+            if df['valor'].iloc[i] > 29:
+                color = 'red'
+            elif df['valor'].iloc[i] < 26:
+                color = 'blue'
+            else:
+                color = 'green'
 
-# Crear la gráfica con puntos y colores personalizados
-fig, ax = plt.subplots()
+            ax.scatter(df['timestamp'].iloc[i], df['valor'].iloc[i], color=color, zorder=3)
+            ax.text(
+                df['timestamp'].iloc[i],
+                df['valor'].iloc[i] - 0.25,
+                f"{df['valor'].iloc[i]:.1f}",
+                color='white',
+                fontsize=8,
+                ha='center'
+            )
 
-# Colores según las condiciones
-for i in range(len(df) - 1):  # Iterar sobre los puntos
-    # Determinar el color del punto
-    if df['valor'].iloc[i] > 29:  # Ajustar a tus valores
-        color = 'red'
-    elif df['valor'].iloc[i] < 26:
-        color = 'blue'
+            if df['valor'].iloc[i + 1] > 29:
+                line_color = 'red'
+            elif df['valor'].iloc[i + 1] < 26:
+                line_color = 'blue'
+            else:
+                line_color = 'green'
+
+            ax.plot(
+                [df['timestamp'].iloc[i], df['timestamp'].iloc[i + 1]],
+                [df['valor'].iloc[i], df['valor'].iloc[i + 1]],
+                color=line_color,
+                zorder=2
+            )
+
+        # Último punto
+        if df['valor'].iloc[-1] > 29:
+            last_color = 'red'
+        elif df['valor'].iloc[-1] < 26:
+            last_color = 'blue'
+        else:
+            last_color = 'green'
+
+        ax.scatter(df['timestamp'].iloc[-1], df['valor'].iloc[-1], color=last_color, zorder=3)
+        ax.text(
+            df['timestamp'].iloc[-1],
+            df['valor'].iloc[-1] - 0.25,
+            f"{df['valor'].iloc[-1]:.1f}",
+            color='white',
+            fontsize=8,
+            ha='center'
+        )
+
+        ax.set_title('Temperatura de la insulina', color='white')
+        ax.set_xlabel('Tiempo', color='white')
+        ax.set_ylabel('Temperatura (°C)', color='white')
+        plt.xticks(rotation=45, color='white')
+        plt.yticks(color='white')
+        ax.set_ylim(df['valor'].min() - 1, df['valor'].max() + 1)
+        ax.invert_xaxis()
+
+        st.pyplot(fig)
     else:
-        color = 'green'
-
-    # Graficar el punto
-    ax.scatter(df['timestamp'].iloc[i], df['valor'].iloc[i], color=color, zorder=3)
-
-    # Agregar el valor debajo del punto
-    ax.text(
-        df['timestamp'].iloc[i],
-        df['valor'].iloc[i] - 0.25,  # Ajustar el valor para que el texto quede debajo
-        f"{df['valor'].iloc[i]:.1f}",  # Formato con dos decimales
-        color='white',
-        fontsize=8,
-        ha='center'  # Centrar el texto horizontalmente
-    )
-
-    # Determinar el color de la línea según el punto al que conecta
-    if df['valor'].iloc[i + 1] > 29:
-        line_color = 'red'
-    elif df['valor'].iloc[i + 1] < 26:
-        line_color = 'blue'
-    else:
-        line_color = 'green'
-
-    # Graficar la línea hasta el siguiente punto
-    ax.plot(
-        [df['timestamp'].iloc[i], df['timestamp'].iloc[i + 1]],
-        [df['valor'].iloc[i], df['valor'].iloc[i + 1]],
-        color=line_color,
-        zorder=2
-    )
-
-# Graficar el último punto
-if df['valor'].iloc[-1] > 29:
-    last_color = 'red'
-elif df['valor'].iloc[-1] < 26:
-    last_color = 'blue'
+        st.warning("La tabla no tiene las columnas necesarias ('timestamp' y 'valor').")
 else:
-    last_color = 'green'
-
-ax.scatter(df['timestamp'].iloc[-1], df['valor'].iloc[-1], color=last_color, zorder=3)
-
-# Agregar el valor al último punto
-ax.text(
-    df['timestamp'].iloc[-1],
-    df['valor'].iloc[-1] - 0.25,  # Ajustar el valor para que el texto quede debajo
-    f"{df['valor'].iloc[-1]:.1f}",  # Formato con dos decimales
-    color='white',
-    fontsize=8,
-    ha='center'
-)
-ax.set_ylim(df['valor'].min() - 1, df['valor'].max() + 1)
-#Lo de abajo en teoria amplia el alcance de la grafica en x, pero hasta ahora no ha hecho falta.
-#ax.set_xlim(df['timestamp'].min() - pd.Timedelta(seconds=5), df['timestamp'].max() + pd.Timedelta(seconds=5))  # Espacio horizontal
-# Ajustes del gráfico
-ax.set_title('Temperatura de la insulina', color='white')  # Título en blanco para destacar
-ax.set_xlabel('Tiempo', color='white')  # Etiqueta del eje x en blanco
-ax.set_ylabel('Temperatura (°C)', color='white')  # Etiqueta del eje y en blanco
-plt.xticks(rotation=45, color='white')  # Rotar etiquetas del eje x y ponerlas en blanco
-plt.yticks(color='white')  # Etiquetas del eje y en blanco
-
-# Invertir el eje x para que las más recientes estén a la izquierda
-ax.invert_xaxis()
-
-# Mostrar la gráfica en Streamlit
-st.pyplot(fig)
-
-# Cerrar conexión a la base de datos
-connection.close()
+    st.warning("No se pudieron obtener datos. Revisa la configuración de la base de datos.")
