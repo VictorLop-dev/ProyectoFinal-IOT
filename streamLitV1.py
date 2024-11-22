@@ -4,7 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Conexión a la base de datos
-connection = mysql.connector.connect(
+connection = pymysql.connect(
     host='localhost',
     user='root',
     password='tu_contraseña',
