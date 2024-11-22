@@ -22,7 +22,8 @@ def fetch_data(host, user, password, database):
             host=host,
             user=user,
             password=password,
-            database=database
+            database=database,
+            port = 12903
         )
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM medicinav1")
