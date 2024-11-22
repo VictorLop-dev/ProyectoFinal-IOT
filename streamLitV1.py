@@ -8,7 +8,7 @@ st.title('Visualización de datos de sensores')
 
 # Entradas para configurar la conexión
 #st.sidebar.header("Configuración de la base de datos")
-host = "autorack.proxy.rlwy.net"
+host = "autorack.proxy.rlwy.net:12903"
 user = "root"
 password = "QYruqXDRGGyBxlYXXcoMmaTSExlNQYxZ"
 database = "railway"
@@ -23,7 +23,7 @@ def fetch_data(host, user, password, database):
             user=user,
             password=password,
             database=database,
-            port = 12903
+            port = 3306
         )
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM medicinav1")
