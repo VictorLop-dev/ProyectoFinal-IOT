@@ -8,10 +8,10 @@ st.title('Visualización de datos de sensores')
 
 # Entradas para configurar la conexión
 st.sidebar.header("Configuración de la base de datos")
-host = st.sidebar.text_input("Host", value="localhost")
-user = st.sidebar.text_input("Usuario", value="root")
-password = st.sidebar.text_input("Contraseña", type="password", value="tu_contraseña")
-database = st.sidebar.text_input("Base de datos", value="finalv1")
+host = "autorack.proxy.rlwy.net"
+user = "root"
+password = "QYruqXDRGGyBxlYXXcoMmaTSExlNQYxZ"
+database = "railway"
 
 # Conectar a la base de datos con pymysql
 @st.cache_data(ttl=600)
