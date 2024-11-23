@@ -63,7 +63,7 @@ if not df.empty:
             ax.text(
                 df['timestamp'].iloc[i],
                 df['valor'].iloc[i] - 0.25,
-                f"{df['valor'].iloc[i]:.1f}",
+                f"{df['valor'].iloc[i]:.2f}",
                 color='white',
                 fontsize=8,
                 ha='center'
@@ -95,7 +95,7 @@ if not df.empty:
         ax.text(
             df['timestamp'].iloc[-1],
             df['valor'].iloc[-1] - 0.25,
-            f"{df['valor'].iloc[-1]:.1f}",
+            f"{df['valor'].iloc[-1]:.2f}",
             color='white',
             fontsize=8,
             ha='center'
