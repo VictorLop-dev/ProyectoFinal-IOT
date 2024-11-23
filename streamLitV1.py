@@ -41,76 +41,76 @@ df = fetch_data(host, user, password, database)
 
     # Procesar y mostrar los datos
     if 'timestamp' in df.columns:
-        df['timestamp'] = pd.to_datetime(df['timestamp'])
-        df = df.sort_values(by='timestamp', ascending=True)
+      df['timestamp'] = pd.to_datetime(df['timestamp'])
+      df = df.sort_values(by='timestamp', ascending=True)
 
-    st.subheader("Tabla de datos")
+  st.subheader("Tabla de datos")
     st.dataframe(df)
 
-    # Visualización de los datos
-    if 'timestamp' in df.columns and 'valor' in df.columns:
-        fig, ax = plt.subplots()
+  # Visualización de los datos
+  if 'timestamp' in df.columns and 'valor' in df.columns:
+      fig, ax = plt.subplots()
 
-        # Colores según las condiciones
-        for i in range(len(df) - 1):
-            if df['valor'].iloc[i] > 29:
+      # Colores según las condiciones
+      for i in range(len(df) - 1):
+          if df['valor'].iloc[i] > 29:
                 color = 'red'
-            elif df['valor'].iloc[i] < 26:
+          elif df['valor'].iloc[i] < 26:
                 color = 'blue'
-            else:
-                color = 'green'
+          else:
+              color = 'green'
 
-            ax.scatter(df['timestamp'].iloc[i], df['valor'].iloc[i], color=color, zorder=3)
-            ax.text(
-                df['timestamp'].iloc[i],
-                df['valor'].iloc[i] - 0.25,
-                f"{df['valor'].iloc[i]:1f}",
-                color='white',
-                fontsize=8,
-                ha='center'
-            )
+          ax.scatter(df['timestamp'].iloc[i], df['valor'].iloc[i], color=color, zorder=3)
+          ax.text(
+              df['timestamp'].iloc[i],
+              df['valor'].iloc[i] - 0.25,
+              f"{df['valor'].iloc[i]:1f}",
+              color='white',
+              fontsize=8,
+              ha='center'
+          )
 
-            if df['valor'].iloc[i + 1] > 29:
-                line_color = 'red'
-            elif df['valor'].iloc[i + 1] < 26:
-                line_color = 'blue'
-            else:
-                line_color = 'green'
+          if df['valor'].iloc[i + 1] > 29:
+              line_color = 'red'
+          elif df['valor'].iloc[i + 1] < 26:
+              line_color = 'blue'
+          else:
+              line_color = 'green'
 
-            ax.plot(
-                [df['timestamp'].iloc[i], df['timestamp'].iloc[i + 1]],
-                [df['valor'].iloc[i], df['valor'].iloc[i + 1]],
-                color=line_color,
-                zorder=2
-            )
+          ax.plot(
+              [df['timestamp'].iloc[i], df['timestamp'].iloc[i + 1]],
+              [df['valor'].iloc[i], df['valor'].iloc[i + 1]],
+              color=line_color,
+              zorder=2
+          )
 
-        # Último punto
-        if df['valor'].iloc[-1] > 29:
-            last_color = 'red'
-        elif df['valor'].iloc[-1] < 26:
-            last_color = 'blue'
-        else:
-            last_color = 'green'
+      # Último punto
+      if df['valor'].iloc[-1] > 29:
+          last_color = 'red'
+      elif df['valor'].iloc[-1] < 26:
+          last_color = 'blue'
+      else:
+          last_color = 'green'
 
-        ax.scatter(df['timestamp'].iloc[-1], df['valor'].iloc[-1], color=last_color, zorder=3)
-        ax.text(
-            df['timestamp'].iloc[-1],
-            df['valor'].iloc[-1] - 0.25,
-            f"{df['valor'].iloc[-1]:.1f}",
-            color='white',
-            fontsize=8,
-            ha='center'
-        )
+      ax.scatter(df['timestamp'].iloc[-1], df['valor'].iloc[-1], color=last_color, zorder=3)
+      ax.text(
+          df['timestamp'].iloc[-1],
+          df['valor'].iloc[-1] - 0.25,
+          f"{df['valor'].iloc[-1]:.1f}",
+          color='white',
+          fontsize=8,
+          ha='center'
+      )
 
-        ax.set_title('Temperatura de la insulina', color='white')
-        ax.set_xlabel('Tiempo', color='white')
-        ax.set_ylabel('Temperatura (°C)', color='white')
-        plt.xticks(rotation=45, color='white')
-        plt.yticks(color='white')
-        ax.set_ylim(df['valor'].min() - 1, df['valor'].max() + 1)
-        ax.invert_xaxis()
+      ax.set_title('Temperatura de la insulina', color='white')
+      ax.set_xlabel('Tiempo', color='white')
+      ax.set_ylabel('Temperatura (°C)', color='white')
+      plt.xticks(rotation=45, color='white')
+      plt.yticks(color='white')
+      ax.set_ylim(df['valor'].min() - 1, df['valor'].max() + 1)
+      ax.invert_xaxis()
 
-        st.pyplot(fig)
-    else:
-        st.warning("La tabla no tiene las columnas necesarias ('timestamp' y 'valor').")
+      st.pyplot(fig)
+  else:
+      st.warning("La tabla no tiene las columnas necesarias ('timestamp' y 'valor').")
 
