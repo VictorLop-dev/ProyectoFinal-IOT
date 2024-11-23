@@ -36,7 +36,7 @@ def fetch_data(host, user, password, database):
         return pd.DataFrame()
 
 # Cargar datos
-df = fetch_data(host, user, password, database)
+"""df = fetch_data(host, user, password, database)
 if 'timestamp' in df.columns:
     df['timestamp'] = pd.to_datetime(df['timestamp'])
     df = df.sort_values(by='timestamp', ascending=True)
@@ -112,6 +112,6 @@ else:
     st.warning("La tabla no tiene las columnas necesarias ('timestamp' y 'valor').")
 
 
-    # Procesar y mostrar los datos
+    # Procesar y mostrar los datos"""
 
 
