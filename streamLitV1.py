@@ -2,7 +2,7 @@ import pymysql
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-from decimal import Decimal
+
 
 
 st.title('Visualización de datos de sensores')
@@ -63,7 +63,7 @@ if not df.empty:
             ax.scatter(df['timestamp'].iloc[i], df['valor'].iloc[i], color=color, zorder=3)
             ax.text(
                 df['timestamp'].iloc[i],
-                df['valor'].iloc[i] - Decimal(0.25),
+                df['valor'].iloc[i] - 0.25,
                 f"{df['valor'].iloc[i]}",
                 color='white',
                 fontsize=8,
