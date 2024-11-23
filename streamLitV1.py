@@ -124,7 +124,6 @@ ax.invert_xaxis()
 # Mostrar la gráfica en Streamlit
 st.pyplot(fig)
 
-# Cerrar conexión a la base de datos
-connection.close()
+
 
 
