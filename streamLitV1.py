@@ -3,11 +3,10 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Configuración inicial de Streamlit
+
 st.title('Visualización de datos de sensores')
 
-# Entradas para configurar la conexión
-#st.sidebar.header("Configuración de la base de datos")
+
 host = "autorack.proxy.rlwy.net"
 user = "root"
 password = "QYruqXDRGGyBxlYXXcoMmaTSExlNQYxZ"
