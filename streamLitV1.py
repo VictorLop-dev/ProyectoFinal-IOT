@@ -38,7 +38,7 @@ def fetch_data(host, user, password, database):
 # Cargar datos
 df = fetch_data(host, user, password, database)
 
-if not df.empty:
+
     # Procesar y mostrar los datos
     if 'timestamp' in df.columns:
         df['timestamp'] = pd.to_datetime(df['timestamp'])
@@ -113,5 +113,4 @@ if not df.empty:
         st.pyplot(fig)
     else:
         st.warning("La tabla no tiene las columnas necesarias ('timestamp' y 'valor').")
-else:
-    st.warning("No se pudieron obtener datos. Revisa la configuración de la base de datos.")
+
