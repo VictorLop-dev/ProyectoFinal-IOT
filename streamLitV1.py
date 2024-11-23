@@ -14,7 +14,7 @@ password = "QYruqXDRGGyBxlYXXcoMmaTSExlNQYxZ"
 database = "railway"
 
 # Conectar a la base de datos con pymysql
-@st.cache_data(ttl=600)
+#@st.cache_data(ttl=600)
 def fetch_data(host, user, password, database):
     try:
         # Conexión a la base de datos
