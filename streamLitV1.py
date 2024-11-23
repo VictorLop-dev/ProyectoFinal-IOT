@@ -36,7 +36,7 @@ def fetch_data(host, user, password, database):
         return pd.DataFrame()
 
 # Cargar datos
-'''df = fetch_data(host, user, password, database)
+df = fetch_data(host, user, password, database)
 if 'timestamp' in df.columns:
     df['timestamp'] = pd.to_datetime(df['timestamp'])
     df = df.sort_values(by='timestamp', ascending=True)
@@ -45,7 +45,7 @@ st.subheader("Tabla de datos")
 st.dataframe(df)
 
 # Visualización de los datos
-if 'timestamp' in df.columns and 'valor' in df.columns:
+'''if 'timestamp' in df.columns and 'valor' in df.columns:
     fig, ax = plt.subplots()
 
     # Colores según las condiciones
