@@ -26,7 +26,7 @@ def fetch_data(host, user, password, database):
             port = 12903
         )
         cursor = connection.cursor()
-        cursor.execute("SELECT * FROM medicinav1")
+        cursor.execute("SELECT * FROM medicinav1 where nombre_sensor = 'DHT22' ")
         data = cursor.fetchall()
         columns = [desc[0] for desc in cursor.description]  # Obtener los nombres de las columnas
         connection.close()
