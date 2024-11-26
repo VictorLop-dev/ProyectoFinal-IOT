@@ -1,7 +1,7 @@
 import streamlit as st
-from PIL import Image
+
 # Configuración inicial de la página
-st.set_page_config(page_title="PokMed App", layout="wide", page_icon="💊")
+st.set_page_config(page_title="Pokmed App", layout="wide", page_icon="💊")
 
 # CSS para personalización
 page_bg = """
@@ -28,7 +28,7 @@ input {
     margin-bottom: 10px;
 }
 h1 {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: bold;
     color: white;
     text-align: center;
@@ -83,68 +83,27 @@ h1 {
 }
 </style>
 """
-
+st.markdown(page_bg, unsafe_allow_html=True)
 
 # Estado inicial de la página
 if "page" not in st.session_state:
     st.session_state.page = "login"
-    
+
 # Inicio de sesión
 if st.session_state.page == "login":
-   uno,dos,tres,cuatro,cinco,seis,siete = st.columns(7)
-   with cinco:
-       st.write("")
-       st.write("")
-       st.write("")
-       st.write("")
-       st.write("")
-       st.write("")
-       st.write("")
-       st.write("")
-       st.write("")
-       st.write("")
-       st.write("")
-       st.write("")
-       st.markdown("<h2>App</h2>", unsafe_allow_html=True)
-   with tres:
-       st.write("")
-       st.write("")
-       st.write("")
-       st.write("")
-       st.write("")
-       st.write("")
-       st.write("")
-       st.write("")
-       st.write("")
-       st.write("")
-       st.write("")
-       st.write("")
-    
-       st.markdown("<h2>Bienvenido</h2>", unsafe_allow_html=True)
-   with cuatro:
-    st.image("PokMed.jpg", caption="",width=177)
-    st.markdown("<h2> a PokMed</h2>", unsafe_allow_html=True)
-    
-    
+    st.markdown("<h1>Bienvenidos a Pokmed</h1>", unsafe_allow_html=True)
 
     # Formulario de login
-    email = st.text_input("Correo electrónico:", value="josepablo83@email.com")
-    password = st.text_input("Contraseña:", value="12345678", type="password")
-    
-    
+    email = st.text_input("Correo electrónico:", value="")
+    password = st.text_input("Contraseña:", value="", type="password")
+
     # Validación de usuario
     if st.button("Iniciar sesión"):
-        
-        if email == "josepablo83@email.com" and password == "12345678":
+        if email == "ejemplo@email.com" and password == "12345678":
             st.session_state.page = "home"
-            st.rerun()  # Recarga segura tras cambio de página
+            st.experimental_rerun()  # Recarga segura tras cambio de página
         else:
             st.error("Correo o contraseña incorrectos.")
-    st.markdown("---")
-    st.markdown("O continúa con:")
-    st.button("Google")
-    st.button("Facebook")
-    st.button("Apple")
 
 # Dashboard
 elif st.session_state.page == "home":
@@ -156,8 +115,7 @@ elif st.session_state.page == "home":
     with col1:
         st.markdown('<div class="box">', unsafe_allow_html=True)
         st.markdown("### Recomendación actual de: **INSULINA**")
-        st.markdown('<div class="info-box">Fecha de caducidad: 24/07/25</div>', unsafe_allow_html=True)
-        st.write("")
+        st.markdown('<div class="info-box">Fecha esperada de caducidad: 24/07/25</div>', unsafe_allow_html=True)
         st.markdown('<div class="info-box">Fecha de apertura: 24/07/25</div>', unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
 
@@ -169,15 +127,12 @@ elif st.session_state.page == "home":
 
     with col3:
         st.markdown('<div class="box">', unsafe_allow_html=True)
-        st.write("")
         st.markdown('<div class="alert-box">Temperatura elevada</div>', unsafe_allow_html=True)
-        st.write("")
         st.markdown('<div class="info-box">Temperatura baja</div>', unsafe_allow_html=True)
-        st.write("")
         st.markdown('<div class="purple-box">Exceso de agitación</div>', unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
 
     # Botón de cierre de sesión
     if st.button("Cerrar sesión"):
         st.session_state.page = "login"
-        st.rerun()
+        st.experimental_rerun()
