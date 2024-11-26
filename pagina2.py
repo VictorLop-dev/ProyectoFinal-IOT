@@ -233,6 +233,13 @@ def main():
 
         # Mostrar la gráfica en Streamlit
         st.pyplot(fig2)
+        col1, col2=st.columns(2)
+        with col1:
+            st.subheader("Tabla de Temperaturas")
+            st.dataframe(df)
+        with col2:
+            st.subheader("Tabla de Movimiento")
+            st.dataframe(df2)
     
 if __name__ == "__main__":
     main()
