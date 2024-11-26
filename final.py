@@ -83,21 +83,7 @@ h1 {
 }
 </style>
 """
-bg_image = "fondo.jpg"
-st.markdown(
-    f"""
-    <style>
-    body {{
-        background-image: url("{bg_image}");
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }}
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-#st.markdown("PokMed.jpg", caption="",width=200)
+
 
 # Estado inicial de la página
 if "page" not in st.session_state:
