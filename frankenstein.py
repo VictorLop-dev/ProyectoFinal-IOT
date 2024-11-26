@@ -3,7 +3,7 @@ import streamlit as st
 # Configuración inicial de la página
 st.set_page_config(page_title="Pokmed App", layout="wide", page_icon="💊")
 
-# Fondo personalizado con estilo CSS
+# CSS para personalización
 page_bg = """
 <style>
 body {
@@ -85,43 +85,31 @@ h1 {
 """
 st.markdown(page_bg, unsafe_allow_html=True)
 
-# Manejo de estado de página
+# Estado inicial de la página
 if "page" not in st.session_state:
     st.session_state.page = "login"
 
-# Página de Inicio de Sesión
+# Inicio de sesión
 if st.session_state.page == "login":
     st.markdown("<h1>Bienvenidos a Pokmed</h1>", unsafe_allow_html=True)
 
-    # Formulario de inicio de sesión con valores predeterminados
-    st.markdown("### Inicia sesión")
-    default_email = "ejemplo@email.com"  # Correo predeterminado
-    default_password = "12345678"  # Contraseña predeterminada
-    email = st.text_input("Correo electrónico:", value=default_email)
-    password = st.text_input("Contraseña:", value=default_password, type="password")
+    # Formulario de login
+    email = st.text_input("Correo electrónico:", value="")
+    password = st.text_input("Contraseña:", value="", type="password")
 
-    # Botón de iniciar sesión
+    # Validación de usuario
     if st.button("Iniciar sesión"):
-        if email == default_email and password == default_password:
+        if email == "ejemplo@email.com" and password == "12345678":
             st.session_state.page = "home"
-            #st.experimental_rerun()
+            st.experimental_rerun()  # Recarga segura tras cambio de página
         else:
             st.error("Correo o contraseña incorrectos.")
 
-    # Opciones de inicio de sesión con servicios externos
-    st.markdown("---")
-    st.markdown("O continúa con:")
-    st.button("Google")
-    st.button("Facebook")
-    st.button("Apple")
-
-# Página de Inicio (Dashboard)
+# Dashboard
 elif st.session_state.page == "home":
-    # Encabezado
     st.markdown('<div class="header">POKMED</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-header">Bienvenido de vuelta, José Pablo</div>', unsafe_allow_html=True)
 
-    # Diseño del dashboard
     col1, col2, col3 = st.columns([2, 1, 2])
 
     with col1:
@@ -144,7 +132,7 @@ elif st.session_state.page == "home":
         st.markdown('<div class="purple-box">Exceso de agitación</div>', unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
 
-    # Botón para cerrar sesión
+    # Botón de cierre de sesión
     if st.button("Cerrar sesión"):
         st.session_state.page = "login"
         st.experimental_rerun()
