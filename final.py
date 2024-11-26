@@ -101,7 +101,7 @@ if st.session_state.page == "login":
     if st.button("Iniciar sesión"):
         if email == "ejemplo@email.com" and password == "12345678":
             st.session_state.page = "home"
-            st.experimental_rerun()  # Recarga segura tras cambio de página
+            st.rerun()  # Recarga segura tras cambio de página
         else:
             st.error("Correo o contraseña incorrectos.")
 
@@ -135,4 +135,4 @@ elif st.session_state.page == "home":
     # Botón de cierre de sesión
     if st.button("Cerrar sesión"):
         st.session_state.page = "login"
-        st.experimental_rerun()
+        st.rerun()
