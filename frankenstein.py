@@ -1,5 +1,5 @@
 import streamlit as st
-
+from PIL import Image
 # Configuración inicial de la página
 st.set_page_config(page_title="Pokmed App", layout="wide", page_icon="💊")
 
