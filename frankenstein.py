@@ -91,8 +91,8 @@ if "page" not in st.session_state:
     
 # Inicio de sesión
 if st.session_state.page == "login":
-    left_co, cent_co,last_co = st.columns(3)
-    with cent_co:
+    uno,dos,tres,cuatro,cinco,seis,siete = st.columns(7)
+    with seis:
         st.image("PokMed.jpg", caption="",width=250)
     st.markdown("<h1>Bienvenidos a Pokmed</h1>", unsafe_allow_html=True)
     
