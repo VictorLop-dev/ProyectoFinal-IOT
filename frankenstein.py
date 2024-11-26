@@ -42,8 +42,8 @@ st.markdown("<h1>Bienvenidos a Mi Aplicación</h1>", unsafe_allow_html=True)
 
 # Formulario de inicio de sesión
 st.markdown("### Inicia sesión")
-email = st.text_input("Correo electrónico:", value="")
-password = st.text_input("Contraseña:", value="", type="password")
+email = st.text_input("Correo electrónico:", value="jospablo1895@gmail.com")
+password = st.text_input("Contraseña:", value="contraseña", type="password")
 
 st.button("Iniciar sesión")
 
