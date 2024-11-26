@@ -117,6 +117,7 @@ if st.session_state.page == "login":
 elif st.session_state.page == "home":
     st.markdown('<div class="header">POKMED</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-header">Bienvenido de vuelta, José Pablo</div>', unsafe_allow_html=True)
+    st.write("")
 
     col1, col2, col3 = st.columns([2, 1, 2])
 
