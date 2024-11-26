@@ -135,4 +135,4 @@ elif st.session_state.page == "home":
     # Botón de cierre de sesión
     if st.button("Cerrar sesión"):
         st.session_state.page = "login"
-        #st.experimental_rerun()
+        st.rerun()
