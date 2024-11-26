@@ -104,7 +104,7 @@ if st.session_state.page == "login":
     if st.button("Iniciar sesión"):
         if email == default_email and password == default_password:
             st.session_state.page = "home"
-            st.experimental_rerun()
+            #st.experimental_rerun()
         else:
             st.error("Correo o contraseña incorrectos.")
 
