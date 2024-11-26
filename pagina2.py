@@ -58,7 +58,7 @@ def main():
     contra = contraIntro.text_input("Contraseña:")
 
     if True:
-        mensajeBienvenida.empty()
+        #mensajeBienvenida.empty()
         mensajeB2.empty()
         nombreIntro.empty()
         contraIntro.empty()
