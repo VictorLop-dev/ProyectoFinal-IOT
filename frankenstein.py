@@ -96,6 +96,11 @@ if st.session_state.page == "login":
     # Formulario de login
     email = st.text_input("Correo electrónico:", value="josepablo83@email.com")
     password = st.text_input("Contraseña:", value="12345678", type="password")
+    st.markdown("---")
+    st.markdown("O continúa con:")
+    st.button("Google")
+    st.button("Facebook")
+    st.button("Apple")
 
     # Validación de usuario
     if st.button("Iniciar sesión"):
