@@ -44,7 +44,7 @@ def fetch_data_mov(host, user, password, database):
         return pd.DataFrame()
 
 def main():
-    st.title('Bienvenido a PokMed')
+    #st.title('Bienvenido a PokMed')
     
     mensajeBienvenida = st.empty()
     mensajeB2 = st.empty()
