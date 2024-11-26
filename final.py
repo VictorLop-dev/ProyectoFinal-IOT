@@ -94,7 +94,7 @@ if st.session_state.page == "login":
    uno,dos,tres,cuatro,cinco,seis,siete = st.columns(7)
    with cuatro:
     st.image("PokMed.jpg", caption="",width=250)
-    st.markdown("<h1>¡Bienvenido a PokMed App!</h1>", unsafe_allow_html=True)
+    st.markdown("<h1>PokMed App</h1>", unsafe_allow_html=True)
     
     
 
