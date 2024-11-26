@@ -94,8 +94,8 @@ if st.session_state.page == "login":
     st.markdown("<h1>Bienvenidos a Pokmed</h1>", unsafe_allow_html=True)
 
     # Formulario de login
-    email = st.text_input("Correo electrónico:", value="")
-    password = st.text_input("Contraseña:", value="", type="password")
+    email = st.text_input("Correo electrónico:", value="ejemplo@email.com")
+    password = st.text_input("Contraseña:", value="12345678", type="password")
 
     # Validación de usuario
     if st.button("Iniciar sesión"):
