@@ -81,11 +81,6 @@ h1 {
     text-align: center;
     color: white;
 }
-.logo{
-    width: 50%;
-    max-width: 300px;
-    border-radius: 10 px;
-}
 </style>
 """
 st.markdown(page_bg, unsafe_allow_html=True)
@@ -96,15 +91,9 @@ if "page" not in st.session_state:
     
 # Inicio de sesión
 if st.session_state.page == "login":
-    st.markdown(
-        """
-        <div class="logo">
-            <img src="PokMed.jpg" alt="PokMed Logo">
-            
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    left_co, cent_co,last_co = st.columns(3)
+    with cent_co:
+        st.image("PokMed.jpg", caption="",width=200)
     st.markdown("<h1>Bienvenidos a Pokmed</h1>", unsafe_allow_html=True)
     
 
