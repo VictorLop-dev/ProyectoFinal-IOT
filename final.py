@@ -119,7 +119,7 @@ elif st.session_state.page == "home":
     col1, col2, col3 = st.columns([2, 1, 2])
 
     with col1:
-        st.image("PokMed.jpg", caption="",width=250)
+        
         st.markdown('<div class="box">', unsafe_allow_html=True)
         st.markdown("### Recomendación actual de: **INSULINA**")
         st.markdown('<div class="info-box">Fecha esperada de caducidad: 24/07/25</div>', unsafe_allow_html=True)
