@@ -92,7 +92,7 @@ if "page" not in st.session_state:
 # Inicio de sesión
 if st.session_state.page == "login":
    uno,dos,tres,cuatro,cinco,seis,siete = st.columns(7)
-   with tres:
+   with cinco:
        st.write("")
        st.write("")
        st.write("")
