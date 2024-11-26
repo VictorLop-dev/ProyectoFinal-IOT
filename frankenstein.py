@@ -83,6 +83,21 @@ h1 {
 }
 </style>
 """
+bg_image = Image.open("PokMed.jpg")
+st.markdown{
+    f"""
+    <style>
+    body {{
+        background-image: url("data:image/png;base64,{st.image(bg_image)}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True
+    
+}
 st.markdown(page_bg, unsafe_allow_html=True)
 
 # Estado inicial de la página
