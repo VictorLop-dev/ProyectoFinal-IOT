@@ -124,7 +124,7 @@ elif st.session_state.page == "home":
 
     with col1:
         
-        st.markdown('<div class="box">', unsafe_allow_html=True)
+        #st.markdown('<div class="box">', unsafe_allow_html=True)
         st.markdown("### Recomendación actual de: **INSULINA**")
         st.markdown('<div class="info-box">Fecha esperada de caducidad: 24/07/25</div>', unsafe_allow_html=True)
         st.write("")
@@ -132,13 +132,13 @@ elif st.session_state.page == "home":
         st.markdown('</div>', unsafe_allow_html=True)
 
     with col2:
-        st.markdown('<div class="box">', unsafe_allow_html=True)
+        #st.markdown('<div class="box">', unsafe_allow_html=True)
         st.markdown('<div class="status-good">En buen estado ✅</div>', unsafe_allow_html=True)
         st.markdown('<div class="status-bad">Probable mal estado por: ❌</div>', unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
 
     with col3:
-        st.markdown('<div class="box">', unsafe_allow_html=True)
+        #st.markdown('<div class="box">', unsafe_allow_html=True)
         st.write("")
         st.markdown('<div class="alert-box">Temperatura elevada</div>', unsafe_allow_html=True)
         st.write("")
