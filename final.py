@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+import pagina2
 # Configuración inicial de la página
 st.set_page_config(page_title="Pokmed App", layout="wide", page_icon="💊")
 
@@ -144,5 +145,7 @@ elif st.session_state.page == "home":
     if st.button("Cerrar sesión"):
         st.session_state.page = "login"
         st.rerun()
+st.markdown("---")
+pagina2.main()
         
     
