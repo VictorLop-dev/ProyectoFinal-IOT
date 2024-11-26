@@ -83,7 +83,7 @@ h1 {
 }
 </style>
 """
-bg_image = Image.open("fondo.jpg")
+bg_image = "fondo.jpg"
 st.markdown(
     f"""
     <style>
