@@ -51,8 +51,8 @@ def main():
     nombreIntro = st.empty()
     contraIntro = st.empty()
     
-    mensajeB2.subheader('Vamos a verificar como se encuentra tu insulina.')
-    mensajeBienvenida.write("Pero primero, por favor dinos quien eres:")
+    #mensajeB2.subheader('Vamos a verificar como se encuentra tu insulina.')
+    #mensajeBienvenida.write("Pero primero, por favor dinos quien eres:")
 
     n = nombreIntro.text_input("Usuario:")
     contra = contraIntro.text_input("Contraseña:")
