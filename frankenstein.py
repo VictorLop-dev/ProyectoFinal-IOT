@@ -96,14 +96,15 @@ if st.session_state.page == "login":
     # Formulario de login
     email = st.text_input("Correo electrónico:", value="josepablo83@email.com")
     password = st.text_input("Contraseña:", value="12345678", type="password")
-    st.markdown("---")
-    st.markdown("O continúa con:")
-    st.button("Google")
-    st.button("Facebook")
-    st.button("Apple")
+    
 
     # Validación de usuario
     if st.button("Iniciar sesión"):
+        st.markdown("---")
+        st.markdown("O continúa con:")
+        st.button("Google")
+        st.button("Facebook")
+        st.button("Apple")
         if email == "josepablo83@email.com" and password == "12345678":
             st.session_state.page = "home"
             st.rerun()  # Recarga segura tras cambio de página
