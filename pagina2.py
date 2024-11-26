@@ -62,7 +62,7 @@ def main():
         mensajeB2.empty()
         nombreIntro.empty()
         contraIntro.empty()
-        st.subheader(f'Bienvenido {n}')
+        #st.subheader(f'Bienvenido {n}')
 
         host = "autorack.proxy.rlwy.net"
         user = "root"
