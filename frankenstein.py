@@ -81,7 +81,7 @@ h1 {
     text-align: center;
     color: white;
 }
-.centered-content img{
+.logo{
     width: 50%;
     max-width: 300px;
     border-radius: 10 px;
@@ -98,9 +98,9 @@ if "page" not in st.session_state:
 if st.session_state.page == "login":
     st.markdown(
         """
-        <div class="centered-content">
+        <div class="logo">
             <img src="PokMed.jpg" alt="PokMed Logo">
-            <h1>Bienvenidos a Pokmed</h1>
+            
         </div>
         """,
         unsafe_allow_html=True
