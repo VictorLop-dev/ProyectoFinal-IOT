@@ -28,7 +28,7 @@ input {
     margin-bottom: 10px;
 }
 h1 {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
     color: white;
     text-align: center;
