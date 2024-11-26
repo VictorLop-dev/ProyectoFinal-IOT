@@ -99,7 +99,15 @@ if n == "Jose Pablo" and contra == "222555":
             st.subheader("Todo parece bien con tu insulina!")
     col1, col2=st.columns(2)
     with col1:
-        
+        df = fetch_data(host, user, password, database)
+        if 'timestamp' in df.columns:
+            df['timestamp'] = pd.to_datetime(df['timestamp'])
+            df = df.sort_values(by='timestamp', ascending=True)
+        # Cargar datos de movimiento
+        df2 = fetch_data_mov(host, user, password, database)
+        if 'timestamp' in df2.columns:
+            df2['timestamp'] = pd.to_datetime(df2['timestamp'])
+            df2 = df2.sort_values(by='timestamp', ascending=True)
             
     
         # Crear la gráfica con puntos y colores personalizados
