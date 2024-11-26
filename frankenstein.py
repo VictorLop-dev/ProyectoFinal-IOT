@@ -36,21 +36,50 @@ h1 {
 </style>
 """
 st.markdown(page_bg, unsafe_allow_html=True)
-
+# Establecer una página actual usando session_state
+if "page" not in st.session_state:
+    st.session_state.page = "login"
 # Contenido principal
-st.markdown("<h1>Bienvenidos a Mi Aplicación</h1>", unsafe_allow_html=True)
-
-# Formulario de inicio de sesión
-st.markdown("### Inicia sesión")
-email = st.text_input("Correo electrónico:", value="jospablo1895@gmail.com")
-password = st.text_input("Contraseña:", value="contraseña", type="password")
-
-st.button("Iniciar sesión")
-
-# Opciones de inicio de sesión con servicios externos
-st.markdown("---")
-st.markdown("O continúa con:")
-st.button("Google")
-st.button("Facebook")
-st.button("Apple")
+if st.session_state.page == "login":
+    
+    st.markdown("<h1>Bienvenidos a Mi Aplicación</h1>", unsafe_allow_html=True)
+    
+    # Formulario de inicio de sesión
+    st.markdown("### Inicia sesión")
+    email = st.text_input("Correo electrónico:", value="jospablo1895@gmail.com")
+    password = st.text_input("Contraseña:", value="contraseña", type="password")
+    
+    st.button("Iniciar sesión")
+    
+    # Opciones de inicio de sesión con servicios externos
+    st.markdown("---")
+    st.markdown("O continúa con:")
+    st.button("Google")
+    st.button("Facebook")
+    st.button("Apple")
+    
+    
+    if st.button("Iniciar sesión"):
+            # Validar credenciales (opcional)
+            if email == default_email and password == default_password:
+                # Cambiar a la página siguiente
+                st.session_state.page = "home"
+                st.experimental_rerun()
+            else:
+                st.error("Correo o contraseña incorrectos.")
+    
+        # Opciones de inicio de sesión con servicios externos
+        st.markdown("---")
+        st.markdown("O continúa con:")
+        st.button("Google")
+        st.button("Facebook")
+        st.button("Apple")
+    
+    # Página de inicio tras iniciar sesión
+    elif st.session_state.page == "home":
+        st.markdown("<h1>Página Principal</h1>", unsafe_allow_html=True)
+        st.markdown("¡Bienvenido! Has iniciado sesión con éxito.")
+        if st.button("Cerrar sesión"):
+            st.session_state.page = "login"
+            st.experimental_rerun()
 
