@@ -115,7 +115,7 @@ if st.session_state.page == "login":
 
 # Dashboard
 elif st.session_state.page == "home":
-    st.image("PokMed.jpg", caption="",width=150)
+    st.image("PokMed.jpg", caption="",width=100)
     st.markdown('<div class="header">POKMED</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-header">Bienvenido de vuelta, José Pablo</div>', unsafe_allow_html=True)
     st.write("")
