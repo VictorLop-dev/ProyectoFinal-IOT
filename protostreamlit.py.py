@@ -81,9 +81,6 @@ if n == "Jose Pablo" and contra == "222555":
  # Crear la gráfica con puntos y colores personalizados
     
 
-    
-    col1, col2=st.columns(2)
-    with col1:
         df = fetch_data(host, user, password, database)
         if 'timestamp' in df.columns:
             df['timestamp'] = pd.to_datetime(df['timestamp'])
@@ -100,6 +97,9 @@ if n == "Jose Pablo" and contra == "222555":
             st.subheader("Tu insulina esta en malas condiciones en este momento! La temperatura esta debajo de 2°")
         else:
             st.subheader("Todo parece bien con tu insulina!")
+    col1, col2=st.columns(2)
+    with col1:
+        
             
     
         # Crear la gráfica con puntos y colores personalizados
