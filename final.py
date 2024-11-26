@@ -125,6 +125,7 @@ elif st.session_state.page == "home":
         st.markdown('<div class="box">', unsafe_allow_html=True)
         st.markdown("### Recomendación actual de: **INSULINA**")
         st.markdown('<div class="info-box">Fecha esperada de caducidad: 24/07/25</div>', unsafe_allow_html=True)
+        st.write("")
         st.markdown('<div class="info-box">Fecha de apertura: 24/07/25</div>', unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
 
