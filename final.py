@@ -120,7 +120,7 @@ if st.session_state.page == "login":
        st.write("")
        st.write("")
     
-       st.markdown("<h2>Bienvenido</h2>", unsafe_allow_html=True)
+       st.markdown("<h2>¡Bienvenido</h2>", unsafe_allow_html=True)
    with cuatro:
     st.image("PokMed.jpg", caption="",width=177)
     st.markdown("<h2>a PokMed </h2>", unsafe_allow_html=True)
