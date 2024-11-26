@@ -136,7 +136,9 @@ elif st.session_state.page == "home":
     with col3:
         st.markdown('<div class="box">', unsafe_allow_html=True)
         st.markdown('<div class="alert-box">Temperatura elevada</div>', unsafe_allow_html=True)
+        st.write("")
         st.markdown('<div class="info-box">Temperatura baja</div>', unsafe_allow_html=True)
+        st.write("")
         st.markdown('<div class="purple-box">Exceso de agitación</div>', unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
 
