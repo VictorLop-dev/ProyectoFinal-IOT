@@ -44,20 +44,9 @@ def fetch_data_mov(host, user, password, database):
         return pd.DataFrame()
 
 def main():
-    st.title('Bienvenido a PokMed')
     
-    mensajeBienvenida = st.empty()
-    mensajeB2 = st.empty()
-    nombreIntro = st.empty()
-    contraIntro = st.empty()
-    
-    mensajeB2.subheader('Vamos a verificar como se encuentra tu insulina.')
-    mensajeBienvenida.write("Pero primero, por favor dinos quien eres:")
 
-    n = nombreIntro.text_input("Usuario:")
-    contra = contraIntro.text_input("Contraseña:")
-
-    if n == "Jose Pablo" and contra == "222555":
+    if True:
         mensajeBienvenida.empty()
         mensajeB2.empty()
         nombreIntro.empty()
