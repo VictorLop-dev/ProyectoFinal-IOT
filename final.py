@@ -1,4 +1,5 @@
 import streamlit as st
+from PIL import Image
 
 # Configuración de la página
 st.set_page_config(page_title="Inicio de Sesión", layout="centered")
