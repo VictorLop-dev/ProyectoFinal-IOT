@@ -57,7 +57,7 @@ def main():
     n = nombreIntro.text_input("Usuario:")
     contra = contraIntro.text_input("Contraseña:")
 
-    if n == "Jose Pablo" and contra == "222555":
+    if True:
         mensajeBienvenida.empty()
         mensajeB2.empty()
         nombreIntro.empty()
