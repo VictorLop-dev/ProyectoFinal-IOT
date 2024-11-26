@@ -82,7 +82,7 @@ def main():
             df2 = df2.sort_values(by='timestamp', ascending=True)
 
         if df['valor'].iloc[-1] > 26:
-            st.subheader("¡Tu insulina está en malas condiciones en este momento! Su temperatura supera los 26°")
+            st.subheader("¡Tu insulina está en malas condiciones en este momento! Su temperatura supera los 26°C")
         elif df['valor'].iloc[-1] < 2:
             st.subheader("¡Tu insulina está en malas condiciones en este momento! Su temperatura está por debajo de los 2°C ")
         else:
