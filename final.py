@@ -93,6 +93,11 @@ if "page" not in st.session_state:
 if st.session_state.page == "login":
    uno,dos,tres,cuatro,cinco,seis,siete = st.columns(7)
    with tres:
+       st.write("")
+       st.write("")
+       st.write("")
+       st.write("")
+       st.write("")
        st.markdown("<h2>Bienvenido</h2>", unsafe_allow_html=True)
    with cuatro:
     st.image("PokMed.jpg", caption="",width=250)
