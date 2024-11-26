@@ -108,7 +108,7 @@ if st.session_state.page == "login":
        st.write("")
        st.markdown("<h2>Bienvenido</h2>", unsafe_allow_html=True)
    with cuatro:
-    st.image("PokMed.jpg", caption="",width=250)
+    st.image("PokMed.jpg", caption="",width=230)
     st.markdown("<h2>a PokMed App</h2>", unsafe_allow_html=True)
     
     
