@@ -1,10 +1,9 @@
 import streamlit as st
 from PIL import Image
+# Configuración inicial de la página
+st.set_page_config(page_title="PokMed App", layout="wide", page_icon="💊")
 
-# Configuración de la página
-st.set_page_config(page_title="Inicio de Sesión", layout="centered")
-
-# Fondo personalizado con estilo
+# CSS para personalización
 page_bg = """
 <style>
 body {
@@ -34,46 +33,136 @@ h1 {
     color: white;
     text-align: center;
 }
+.header {
+    text-align: center;
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+}
+.sub-header {
+    text-align: center;
+    color: white;
+    font-size: 24px;
+}
+.box {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+}
+.status-good {
+    color: green;
+    font-size: 18px;
+    font-weight: bold;
+}
+.status-bad {
+    color: red;
+    font-size: 18px;
+    font-weight: bold;
+}
+.info-box {
+    background-color: #0d6efd;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+}
+.alert-box {
+    background-color: red;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+}
+.purple-box {
+    background-color: purple;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+}
 </style>
 """
-st.markdown(page_bg, unsafe_allow_html=True)
+bg_image = "fondo.jpg"
+st.markdown(
+    f"""
+    <style>
+    body {{
+        background-image: url("{bg_image}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+#st.markdown("PokMed.jpg", caption="",width=200)
 
-# Establecer una página actual usando session_state
+# Estado inicial de la página
 if "page" not in st.session_state:
     st.session_state.page = "login"
-
-# Página de Inicio de Sesión
+    
+# Inicio de sesión
 if st.session_state.page == "login":
-    st.markdown("<h1>Bienvenidos a Mi Aplicación</h1>", unsafe_allow_html=True)
+   uno,dos,tres,cuatro,cinco,seis,siete = st.columns(7)
+   with cinco:
+    st.image("PokMed.jpg", caption="",width=250)
+    st.markdown("<h1>¡Bienvenido a PokMed App!</h1>", unsafe_allow_html=True)
+    
+    
 
-    # Formulario de inicio de sesión con valores predeterminados
-    st.markdown("### Inicia sesión")
-    default_email = "ejemplo@email.com"  # Correo predeterminado
-    default_password = "12345678"  # Contraseña predeterminada
-    email = st.text_input("Correo electrónico:", value=default_email)
-    password = st.text_input("Contraseña:", value=default_password, type="password")
-
-    # Botón de iniciar sesión
+    # Formulario de login
+    email = st.text_input("Correo electrónico:", value="josepablo83@email.com")
+    password = st.text_input("Contraseña:", value="12345678", type="password")
+    
+    
+    # Validación de usuario
     if st.button("Iniciar sesión"):
-        # Validar credenciales (opcional)
-        if email == default_email and password == default_password:
-            # Cambiar a la página siguiente
+        
+        if email == "josepablo83@email.com" and password == "12345678":
             st.session_state.page = "home"
-            st.experimental_rerun()
+            st.rerun()  # Recarga segura tras cambio de página
         else:
             st.error("Correo o contraseña incorrectos.")
-
-    # Opciones de inicio de sesión con servicios externos
     st.markdown("---")
     st.markdown("O continúa con:")
     st.button("Google")
     st.button("Facebook")
     st.button("Apple")
 
-# Página de inicio tras iniciar sesión
+# Dashboard
 elif st.session_state.page == "home":
-    st.markdown("<h1>Página Principal</h1>", unsafe_allow_html=True)
-    st.markdown("¡Bienvenido! Has iniciado sesión con éxito.")
+    st.markdown('<div class="header">POKMED</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sub-header">Bienvenido de vuelta, José Pablo</div>', unsafe_allow_html=True)
+
+    col1, col2, col3 = st.columns([2, 1, 2])
+
+    with col1:
+        st.markdown('<div class="box">', unsafe_allow_html=True)
+        st.markdown("### Recomendación actual de: **INSULINA**")
+        st.markdown('<div class="info-box">Fecha de caducidad: 24/07/25</div>', unsafe_allow_html=True)
+        st.write("")
+        st.markdown('<div class="info-box">Fecha de apertura: 24/07/25</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    with col2:
+        st.markdown('<div class="box">', unsafe_allow_html=True)
+        st.markdown('<div class="status-good">En buen estado ✅</div>', unsafe_allow_html=True)
+        st.markdown('<div class="status-bad">Probable mal estado por: ❌</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    with col3:
+        st.markdown('<div class="box">', unsafe_allow_html=True)
+        st.write("")
+        st.markdown('<div class="alert-box">Temperatura elevada</div>', unsafe_allow_html=True)
+        st.write("")
+        st.markdown('<div class="info-box">Temperatura baja</div>', unsafe_allow_html=True)
+        st.write("")
+        st.markdown('<div class="purple-box">Exceso de agitación</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    # Botón de cierre de sesión
     if st.button("Cerrar sesión"):
         st.session_state.page = "login"
-        st.experimental_rerun()
+        st.rerun()
