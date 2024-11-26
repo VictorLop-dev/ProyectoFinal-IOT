@@ -1,9 +1,9 @@
 import streamlit as st
 
-# Configuración de la página
-st.set_page_config(page_title="Inicio de Sesión", layout="centered")
+# Configuración inicial de la página
+st.set_page_config(page_title="Pokmed App", layout="wide", page_icon="💊")
 
-# Fondo personalizado con estilo
+# Fondo personalizado con estilo CSS
 page_bg = """
 <style>
 body {
@@ -33,17 +33,65 @@ h1 {
     color: white;
     text-align: center;
 }
+.header {
+    text-align: center;
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+}
+.sub-header {
+    text-align: center;
+    color: white;
+    font-size: 24px;
+}
+.box {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+}
+.status-good {
+    color: green;
+    font-size: 18px;
+    font-weight: bold;
+}
+.status-bad {
+    color: red;
+    font-size: 18px;
+    font-weight: bold;
+}
+.info-box {
+    background-color: #0d6efd;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+}
+.alert-box {
+    background-color: red;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+}
+.purple-box {
+    background-color: purple;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+}
 </style>
 """
 st.markdown(page_bg, unsafe_allow_html=True)
 
-# Establecer una página actual usando session_state
+# Manejo de estado de página
 if "page" not in st.session_state:
     st.session_state.page = "login"
 
 # Página de Inicio de Sesión
 if st.session_state.page == "login":
-    st.markdown("<h1>Bienvenidos a Mi Aplicación</h1>", unsafe_allow_html=True)
+    st.markdown("<h1>Bienvenidos a Pokmed</h1>", unsafe_allow_html=True)
 
     # Formulario de inicio de sesión con valores predeterminados
     st.markdown("### Inicia sesión")
@@ -54,9 +102,7 @@ if st.session_state.page == "login":
 
     # Botón de iniciar sesión
     if st.button("Iniciar sesión"):
-        # Validar credenciales (opcional)
         if email == default_email and password == default_password:
-            # Cambiar a la página siguiente
             st.session_state.page = "home"
             st.experimental_rerun()
         else:
@@ -69,10 +115,36 @@ if st.session_state.page == "login":
     st.button("Facebook")
     st.button("Apple")
 
-# Página de inicio tras iniciar sesión
+# Página de Inicio (Dashboard)
 elif st.session_state.page == "home":
-    st.markdown("<h1>Página Principal</h1>", unsafe_allow_html=True)
-    st.markdown("¡Bienvenido! Has iniciado sesión con éxito.")
+    # Encabezado
+    st.markdown('<div class="header">POKMED</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sub-header">Bienvenido de vuelta, José Pablo</div>', unsafe_allow_html=True)
+
+    # Diseño del dashboard
+    col1, col2, col3 = st.columns([2, 1, 2])
+
+    with col1:
+        st.markdown('<div class="box">', unsafe_allow_html=True)
+        st.markdown("### Recomendación actual de: **INSULINA**")
+        st.markdown('<div class="info-box">Fecha esperada de caducidad: 24/07/25</div>', unsafe_allow_html=True)
+        st.markdown('<div class="info-box">Fecha de apertura: 24/07/25</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    with col2:
+        st.markdown('<div class="box">', unsafe_allow_html=True)
+        st.markdown('<div class="status-good">En buen estado ✅</div>', unsafe_allow_html=True)
+        st.markdown('<div class="status-bad">Probable mal estado por: ❌</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    with col3:
+        st.markdown('<div class="box">', unsafe_allow_html=True)
+        st.markdown('<div class="alert-box">Temperatura elevada</div>', unsafe_allow_html=True)
+        st.markdown('<div class="info-box">Temperatura baja</div>', unsafe_allow_html=True)
+        st.markdown('<div class="purple-box">Exceso de agitación</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    # Botón para cerrar sesión
     if st.button("Cerrar sesión"):
         st.session_state.page = "login"
         st.experimental_rerun()
