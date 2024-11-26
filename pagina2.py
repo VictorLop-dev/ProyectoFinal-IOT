@@ -233,6 +233,9 @@ def main():
 
         # Mostrar la gráfica en Streamlit
         st.pyplot(fig2)
+        st.write("")
+        st.write("")
+        st.write("")
         col1, col2=st.columns(2)
         with col1:
             st.subheader("Tabla de Temperaturas")
