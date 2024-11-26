@@ -97,7 +97,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-st.markdown("PokMed.jpg", caption=""width=200)
+st.markdown("PokMed.jpg", caption="",width=200)
 
 # Estado inicial de la página
 if "page" not in st.session_state:
