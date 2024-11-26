@@ -172,84 +172,86 @@ if n == "Jose Pablo" and contra == "222555":
 
 #GRAFICA 2
  # Crear la gráfica con puntos y colores personalizados
-    fig2, ax2 = plt.subplots()
-
-    # Colores según las condiciones
-    for i in range(len(df2) - 1):  # Iterar sobre los puntos
-        # Determinar el color del punto
-        if df2['valor'].iloc[i] > 26:  # Ajustar a tus valores
-            color = '#FF7F3E'
-        elif df2['valor'].iloc[i] < 2:
-            color = '#4335A7'
-        else:
-            color = '#80C4E9'
-
-        # Graficar el punto
-        ax2.scatter(df2['timestamp'].iloc[i], df2['valor'].iloc[i], color=color, zorder=3)
-
-        # Agregar el valor debajo del punto
-        ax2.text(
-            df2['timestamp'].iloc[i],
-            df2['valor'].iloc[i] - 0.25,  # Ajustar el valor para que el texto quede debajo
-            f"{df2['valor'].iloc[i]:.1f}",  # Formato con dos decimales
-            color='white',
-            fontsize=8,
-            ha='center'  # Centrar el texto horizontalmente
-        )
-
-        # Determinar el color de la línea según el punto al que conecta
-        if df2['valor'].iloc[i + 1] > 2:
-            line_color = '#FF7F3E'
-        else:
-            line_color = '#80C4E9'
-
-        # Graficar la línea hasta el siguiente punto
-        ax2.plot(
-            [df2['timestamp'].iloc[i], df2['timestamp'].iloc[i + 1]],
-            [df2['valor'].iloc[i], df2['valor'].iloc[i + 1]],
-            color=line_color,
-            zorder=2
-        )
-
-    # Graficar el último punto
-    if df2['valor'].iloc[-1] > 2:
-        last_color = '#FF7F3E'
-    else:
-        last_color = '#80C4E9'
-
-    ax2.scatter(df2['timestamp'].iloc[-1], df2['valor'].iloc[-1], color=last_color, zorder=3)
-
-    # Agregar el valor al último punto
-    ax2.text(
-        df2['timestamp'].iloc[-1],
-        df2['valor'].iloc[-1] - 0.25,  # Ajustar el valor para que el texto quede debajo
-        f"{df2['valor'].iloc[-1]:.1f}",  # Formato con dos decimales
-        color='white',
-        fontsize=8,
-        ha='center'
-    )
-    ax2.set_ylim(df2['valor'].min() - 1, df2['valor'].max() + 1)
-    # Lo de abajo en teoria amplia el alcance de la grafica en x, pero hasta ahora no ha hecho falta.
-    # ax.set_xlim(df['timestamp'].min() - pd.Timedelta(seconds=5), df['timestamp'].max() + pd.Timedelta(seconds=5))  # Espacio horizontal
-    # Ajustes del gráfico
-    ax2.set_title('Movimiento de la insulina', color='white')  # Título en blanco para destacar
-    ax2.set_xlabel('Tiempo', color='white')  # Etiqueta del eje x en blanco
-    ax2.set_ylabel('Temperatura (°C)', color='white')  # Etiqueta del eje y en blanco
-    plt.xticks(rotation=45, color='white')  # Rotar etiquetas del eje x y ponerlas en blanco
-    plt.yticks(color='white')  # Etiquetas del eje y en blanco
-
-    # Invertir el eje x para que las más recientes estén a la izquierda
-    ax2.invert_xaxis()
-
-    # Mostrar la gráfica en Streamlit
-    st.pyplot(fig2)
+    
 
     
     col1, col2=st.columns(2)
     with col1:
+        
         st.subheader("Tabla de Temperaturas")
         st.dataframe(df)
     with col2:
+        fig2, ax2 = plt.subplots()
+
+    # Colores según las condiciones
+        for i in range(len(df2) - 1):  # Iterar sobre los puntos
+            # Determinar el color del punto
+            if df2['valor'].iloc[i] > 26:  # Ajustar a tus valores
+                color = '#FF7F3E'
+            elif df2['valor'].iloc[i] < 2:
+                color = '#4335A7'
+            else:
+                color = '#80C4E9'
+    
+            # Graficar el punto
+            ax2.scatter(df2['timestamp'].iloc[i], df2['valor'].iloc[i], color=color, zorder=3)
+    
+            # Agregar el valor debajo del punto
+            ax2.text(
+                df2['timestamp'].iloc[i],
+                df2['valor'].iloc[i] - 0.25,  # Ajustar el valor para que el texto quede debajo
+                f"{df2['valor'].iloc[i]:.1f}",  # Formato con dos decimales
+                color='white',
+                fontsize=8,
+                ha='center'  # Centrar el texto horizontalmente
+            )
+    
+            # Determinar el color de la línea según el punto al que conecta
+            if df2['valor'].iloc[i + 1] > 2:
+                line_color = '#FF7F3E'
+            else:
+                line_color = '#80C4E9'
+    
+            # Graficar la línea hasta el siguiente punto
+            ax2.plot(
+                [df2['timestamp'].iloc[i], df2['timestamp'].iloc[i + 1]],
+                [df2['valor'].iloc[i], df2['valor'].iloc[i + 1]],
+                color=line_color,
+                zorder=2
+            )
+    
+        # Graficar el último punto
+        if df2['valor'].iloc[-1] > 2:
+            last_color = '#FF7F3E'
+        else:
+            last_color = '#80C4E9'
+    
+        ax2.scatter(df2['timestamp'].iloc[-1], df2['valor'].iloc[-1], color=last_color, zorder=3)
+    
+        # Agregar el valor al último punto
+        ax2.text(
+            df2['timestamp'].iloc[-1],
+            df2['valor'].iloc[-1] - 0.25,  # Ajustar el valor para que el texto quede debajo
+            f"{df2['valor'].iloc[-1]:.1f}",  # Formato con dos decimales
+            color='white',
+            fontsize=8,
+            ha='center'
+        )
+        ax2.set_ylim(df2['valor'].min() - 1, df2['valor'].max() + 1)
+        # Lo de abajo en teoria amplia el alcance de la grafica en x, pero hasta ahora no ha hecho falta.
+        # ax.set_xlim(df['timestamp'].min() - pd.Timedelta(seconds=5), df['timestamp'].max() + pd.Timedelta(seconds=5))  # Espacio horizontal
+        # Ajustes del gráfico
+        ax2.set_title('Movimiento de la insulina', color='white')  # Título en blanco para destacar
+        ax2.set_xlabel('Tiempo', color='white')  # Etiqueta del eje x en blanco
+        ax2.set_ylabel('Temperatura (°C)', color='white')  # Etiqueta del eje y en blanco
+        plt.xticks(rotation=45, color='white')  # Rotar etiquetas del eje x y ponerlas en blanco
+        plt.yticks(color='white')  # Etiquetas del eje y en blanco
+    
+        # Invertir el eje x para que las más recientes estén a la izquierda
+        ax2.invert_xaxis()
+    
+        # Mostrar la gráfica en Streamlit
+        st.pyplot(fig2)
         st.subheader("Tabla de Movimiento")
         st.dataframe(df2)
 
