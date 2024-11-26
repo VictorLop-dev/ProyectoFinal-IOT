@@ -92,6 +92,7 @@ if "page" not in st.session_state:
 # Inicio de sesión
 if st.session_state.page == "login":
     st.markdown("<h1>Bienvenidos a Pokmed</h1>", unsafe_allow_html=True)
+    st.image("PokMed.jpg", caption="")
 
     # Formulario de login
     email = st.text_input("Correo electrónico:", value="josepablo83@email.com")
