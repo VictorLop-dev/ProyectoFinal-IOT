@@ -104,6 +104,11 @@ if st.session_state.page == "login":
             st.rerun()  # Recarga segura tras cambio de página
         else:
             st.error("Correo o contraseña incorrectos.")
+    st.markdown("---")
+    st.markdown("O continúa con:")
+    st.button("Google")
+    st.button("Facebook")
+    st.button("Apple")
 
 # Dashboard
 elif st.session_state.page == "home":
