@@ -142,10 +142,11 @@ elif st.session_state.page == "home":
         st.markdown('</div>', unsafe_allow_html=True)
 
     # Botón de cierre de sesión
+    st.markdown("---")
+    pagina2.main()
     if st.button("Cerrar sesión"):
         st.session_state.page = "login"
         st.rerun()
-st.markdown("---")
-pagina2.main()
+
         
     
