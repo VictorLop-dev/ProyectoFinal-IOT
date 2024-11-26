@@ -1,7 +1,7 @@
 import streamlit as st
 from PIL import Image
 # Configuración inicial de la página
-st.set_page_config(page_title="Pokmed App", layout="wide", page_icon="💊")
+st.set_page_config(page_title="PokMed App", layout="wide", page_icon="💊")
 
 # CSS para personalización
 page_bg = """
@@ -94,7 +94,7 @@ if st.session_state.page == "login":
    uno,dos,tres,cuatro,cinco,seis,siete = st.columns(7)
    with cinco:
     st.image("PokMed.jpg", caption="",width=250)
-    st.markdown("<h1>¡Bienvenido a Pokmed App!</h1>", unsafe_allow_html=True)
+    st.markdown("<h1>¡Bienvenido a PokMed App!</h1>", unsafe_allow_html=True)
     
     
 
