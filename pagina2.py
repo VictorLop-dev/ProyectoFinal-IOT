@@ -82,11 +82,11 @@ def main():
             df2 = df2.sort_values(by='timestamp', ascending=True)
 
         if df['valor'].iloc[-1] > 26:
-            st.subheader("Tu insulina esta en malas condiciones en este momento! La temperatura supera los 26°")
+            st.subheader("¡Tu insulina está en malas condiciones en este momento! Su temperatura supera los 26°")
         elif df['valor'].iloc[-1] < 2:
-            st.subheader("Tu insulina esta en malas condiciones en este momento! La temperatura esta debajo de 2°")
+            st.subheader("¡Tu insulina está en malas condiciones en este momento! Su temperatura está por debajo de los 2°C ")
         else:
-            st.subheader("Todo parece bien con tu insulina!")
+            st.subheader("¡Todo parece bien con tu insulina!")
 
         # Crear la gráfica con puntos y colores personalizados
         fig, ax = plt.subplots()
