@@ -97,7 +97,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-st.markdown(page_bg, unsafe_allow_html=True)
+st.markdown("<h1 style='color: white; text-align: center;'>Bienvenidos a PokMed</h1>", unsafe_allow_html=True)
 
 # Estado inicial de la página
 if "page" not in st.session_state:
