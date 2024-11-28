@@ -120,7 +120,7 @@ def main():
                 df['timestamp'].iloc[i],
                 df['valor'].iloc[i] - 0.25,  # Ajustar el valor para que el texto quede debajo
                 f"{df['valor'].iloc[i]:.1f}",  # Formato con dos decimales
-                color='white',
+                color='black',
                 fontsize=8,
                 ha='center'  # Centrar el texto horizontalmente
             )
@@ -156,7 +156,7 @@ def main():
             df['timestamp'].iloc[-1],
             df['valor'].iloc[-1] - 0.25,  # Ajustar el valor para que el texto quede debajo
             f"{df['valor'].iloc[-1]:.1f}",  # Formato con dos decimales
-            color='white',
+            color='black',
             fontsize=8,
             ha='center'
         )
