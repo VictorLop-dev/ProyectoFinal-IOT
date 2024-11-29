@@ -166,7 +166,7 @@ def main():
         # Ajustes del gráfico
         ax.set_title('Movimiento de la insulina', color='black')  # Título en blanco para destacar
         ax.set_xlabel('Tiempo', color='black')  # Etiqueta del eje x en blanco
-        ax.set_ylabel('Temperatura (°C)', color='black')  # Etiqueta del eje y en blanco
+        ax.set_ylabel('Movimiento', color='black')  # Etiqueta del eje y en blanco
         plt.xticks(rotation=45, color='white')  # Rotar etiquetas del eje x y ponerlas en blanco
         plt.yticks(color='white')  # Etiquetas del eje y en blanco
     
