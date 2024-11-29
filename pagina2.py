@@ -156,7 +156,7 @@ def main():
             df['timestamp'].iloc[-1],
             df['valor'].iloc[-1] - 0.25,  # Ajustar el valor para que el texto quede debajo
             f"{df['valor'].iloc[-1]:.1f}",  # Formato con dos decimales
-            color='black',
+            color='white',
             fontsize=8,
             ha='center'
         )
@@ -198,7 +198,7 @@ def main():
                 df2['timestamp'].iloc[i],
                 df2['valor'].iloc[i] - 0.25,  # Ajustar el valor para que el texto quede debajo
                 f"{df2['valor'].iloc[i]:.1f}",  # Formato con dos decimales
-                color='black',
+                color='white',
                 fontsize=8,
                 ha='center'  # Centrar el texto horizontalmente
             )
@@ -242,7 +242,7 @@ def main():
         ax2.set_xlabel('Fecha y hora de medición', color='black')  # Etiqueta del eje x en blanco
         ax2.set_ylabel('Movimiento', color='black')  # Etiqueta del eje y en blanco
         plt.xticks(rotation=45, color='black')  # Rotar etiquetas del eje x y ponerlas en blanco
-        plt.yticks(color='white')  # Etiquetas del eje y en blanco
+        plt.yticks(color='black')  # Etiquetas del eje y en blanco
     
         # Invertir el eje x para que las más recientes estén a la izquierda
         ax2.invert_xaxis()
