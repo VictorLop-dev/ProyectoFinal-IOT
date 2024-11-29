@@ -165,7 +165,7 @@ def main():
         # ax.set_xlim(df['timestamp'].min() - pd.Timedelta(seconds=5), df['timestamp'].max() + pd.Timedelta(seconds=5))  # Espacio horizontal
         # Ajustes del gráfico
         ax.set_title('Temperatura de la insulina', color='black')  # Título en blanco para destacar
-        ax.set_xlabel('Tiempo', color='black')  # Etiqueta del eje x en blanco
+        ax.set_xlabel('Fecha y hora de medición', color='black')  # Etiqueta del eje x en blanco
         ax.set_ylabel('Temperatura °C', color='black')  # Etiqueta del eje y en blanco
         plt.xticks(rotation=45, color='white')  # Rotar etiquetas del eje x y ponerlas en blanco
         plt.yticks(color='white')  # Etiquetas del eje y en blanco
@@ -239,7 +239,7 @@ def main():
         # ax.set_xlim(df['timestamp'].min() - pd.Timedelta(seconds=5), df['timestamp'].max() + pd.Timedelta(seconds=5))  # Espacio horizontal
         # Ajustes del gráfico
         ax2.set_title('Movimiento de la insulina', color='black')  # Título en blanco para destacar
-        ax2.set_xlabel('Tiempo', color='black')  # Etiqueta del eje x en blanco
+        ax2.set_xlabel('Fecha y hora de medición', color='black')  # Etiqueta del eje x en blanco
         ax2.set_ylabel('Movimiento', color='black')  # Etiqueta del eje y en blanco
         plt.xticks(rotation=45, color='white')  # Rotar etiquetas del eje x y ponerlas en blanco
         plt.yticks(color='white')  # Etiquetas del eje y en blanco
