@@ -167,8 +167,8 @@ def main():
         ax.set_title('Temperatura de la insulina', color='black')  # Título en blanco para destacar
         ax.set_xlabel('Fecha y hora de medición', color='black')  # Etiqueta del eje x en blanco
         ax.set_ylabel('Temperatura °C', color='black')  # Etiqueta del eje y en blanco
-        plt.xticks(rotation=45, color='white')  # Rotar etiquetas del eje x y ponerlas en blanco
-        plt.yticks(color='white')  # Etiquetas del eje y en blanco
+        plt.xticks(rotation=45, color='black')  # Rotar etiquetas del eje x y ponerlas en blanco
+        plt.yticks(color='black')  # Etiquetas del eje y en blanco
     
         # Invertir el eje x para que las más recientes estén a la izquierda
         ax.invert_xaxis()
