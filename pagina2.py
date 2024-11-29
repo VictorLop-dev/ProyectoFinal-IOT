@@ -242,7 +242,7 @@ def main():
         ax2.set_xlabel('Fecha y hora de medición', color='black')  # Etiqueta del eje x en blanco
         ax2.set_ylabel('Movimiento', color='black')  # Etiqueta del eje y en blanco
         plt.xticks(rotation=45, color='black')  # Rotar etiquetas del eje x y ponerlas en blanco
-        plt.yticks(color='black')  # Etiquetas del eje y en blanco
+        plt.yticks(color='white')  # Etiquetas del eje y en blanco
     
         # Invertir el eje x para que las más recientes estén a la izquierda
         ax2.invert_xaxis()
