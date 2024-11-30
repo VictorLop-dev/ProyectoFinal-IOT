@@ -1,6 +1,6 @@
 //Este tiene todo integrado
 const char* ssid = "Nombre de tu red";
-//Yo debo estar con el internet del Tec
+
 const char* password = "Contraseña de tu red";
 // URL del servidor (cambia localhost por la IP de tu servidor)
 const char* serverName = "IP de tu servidor";
