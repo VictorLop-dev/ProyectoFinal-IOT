@@ -1,9 +1,9 @@
 //Este tiene todo integrado
-const char* ssid = "Tec-IoT";
+const char* ssid = "Nombre de tu red";
 //Yo debo estar con el internet del Tec
-const char* password = "spotless.magnetic.bridge";
+const char* password = "Contraseña de tu red";
 // URL del servidor (cambia localhost por la IP de tu servidor)
-const char* serverName = "https://iotweb-production.up.railway.app/insert_data";
+const char* serverName = "IP de tu servidor";
 
 
 #include "Arduino.h" 
